@@ -1,0 +1,16 @@
+services:
+  sqlagent:
+    build: 
+      context: ./sqlagent
+    ports:
+      - 8000:8000
+    environment:
+      - OPENAI_API_KEY=xxxx
+      - DB_CONNECTION_STRING=postgresql+psycopg2://postgres:postgres@db/chinook
+  
+  db:
+    image: postgres
+    volumes:
+      - ./db/Chinook_PostgreSql.sql:/docker-entrypoint-initdb.d/Chinook_PostgreSql.sql
+    environment:
+      POSTGRES_PASSWORD: postgres
