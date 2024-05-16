@@ -7,4 +7,10 @@ db = SQLDatabase.from_uri(os.environ["DB_CONNECTION_STRING"])
 
 llm = ChatOpenAI(model="gpt-3.5-turbo", temperature=0)
 
-agent_executor = create_sql_agent(llm, db=db, agent_type="openai-tools", verbose=True)
+agent_executor = create_sql_agent(
+    llm,
+    db=db,
+    agent_type="openai-tools",
+    verbose=True,
+    agent_executor_kwargs={"return_intermediate_steps": True},
+)
